@@ -20,8 +20,7 @@ class EmprestimoDao extends Dao
     }
 
     /** Lista com o nome do usuário e o título do livro (JOIN). */
-    public function listarTodos(): array
-    {
+    public function listarTodos(): array {
         $query = $this->bd->prepare(
             'SELECT e.id, e.usuario_id, e.livro_id, e.data_emprestimo, e.data_devolucao,
                     u.nome AS usuario_nome, l.titulo AS livro_titulo
@@ -35,6 +34,12 @@ class EmprestimoDao extends Dao
         return $query->fetchAll(PDO::FETCH_CLASS, Emprestimo::class);
     }
 
+    public function devolver($id) {
+        $query = $this->db->prepare 
+        ('UPDATE emprestimos SET data_devolucao = NOW() WHERE id = :id');
+        $query->bindParam(':id', $id, PDO::PARAM_INT);
+        $query->execute();
+    }
     /** O livro continua emprestado enquanto a data de devolução for hoje ou depois. */
     public function livroIndisponivel(int $livroId, string $hoje): bool
     {
