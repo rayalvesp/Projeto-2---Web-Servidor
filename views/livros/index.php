@@ -1,4 +1,4 @@
-    <h1 class="page-title">Cadastro de livros</h1>
+<h1 class="page-title">Cadastro de livros</h1>
 
     <div class="ficha">
       <div class="ficha__cabecalho">
@@ -7,7 +7,7 @@
       </div>
 
       <form method="POST" action="<?= e(url('/livros')) ?>">
-
+        <?= csrfField() ?>
         <div class="campo">
           <label for="livro-titulo">Título <span class="obrigatorio">*</span></label>
           <input type="text" id="livro-titulo" name="titulo" value="<?= e(antigo('titulo')) ?>" />
@@ -92,11 +92,11 @@
                   </a>
 
                   <form method="POST"
-                  <?= csrfField() ?>
                     action="<?= e(url('/livros/excluir')) ?>"
                     style="display: inline-block;"
                     onsubmit="return confirm('Tem certeza que deseja excluir este livro?');">
 
+                    <?= csrfField() ?>
                     <input type="hidden" name="id" value="<?= e((string) $livro->getId()) ?>">
 
                     <button type="submit" class="botao botao--secundario">
