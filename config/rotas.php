@@ -27,6 +27,7 @@ return static function (Router $r): void {
 
     $r->get('/emprestimos', [EmprestimoController::class, 'index']);
     $r->post('/emprestimos', [EmprestimoController::class, 'salvar']);
+    $r->get('/emprestimos/devolver', [EmprestimoController::class, 'devolver']);
 
     // Páginas de erro
     $r->naoEncontrada([ErroController::class, 'naoEncontrado']);

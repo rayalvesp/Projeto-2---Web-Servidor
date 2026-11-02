@@ -60,6 +60,15 @@ class EmprestimoController extends Controller {
         $this->redirecionar('/emprestimos');
     }
 
+    public function devolver(){
+        $id=$_GT['id'] ?? null;
+        if ($id) {
+            $dao = new EmprestimoDao();
+            $dao->devolver($id);
+            header ('Location: /emprestimos?sucesso=devolvido');
+        }
+    }
+
     /** @return string[] lista de mensagens de erro (vazia = tudo certo) */
     private function validar(array $dados): array {
         $erros = [];
