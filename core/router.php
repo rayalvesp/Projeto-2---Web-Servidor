@@ -6,22 +6,32 @@ namespace Biblioteca\Core;
 
 use Throwable;
 
-
 final class Router
 {
-   
     private array $rotas = [];
     private ?array $acaoNaoEncontrada = null;
     private ?array $acaoErroInterno = null;
 
-    public function get(string $caminho, array $acao, bool $publica = false): void
-    {
-        $this->rotas['GET'][$this->normalizar($caminho)] = ['acao' => $acao, 'publica' => $publica];
+    public function get(
+        string $caminho,
+        array $acao,
+        bool $publica = false
+    ): void {
+        $this->rotas['GET'][$this->normalizar($caminho)] = [
+            'acao' => $acao,
+            'publica' => $publica,
+        ];
     }
 
-    public function post(string $caminho, array $acao, bool $publica = false): void
-    {
-        $this->rotas['POST'][$this->normalizar($caminho)] = ['acao' => $acao, 'publica' => $publica];
+    public function post(
+        string $caminho,
+        array $acao,
+        bool $publica = false
+    ): void {
+        $this->rotas['POST'][$this->normalizar($caminho)] = [
+            'acao' => $acao,
+            'publica' => $publica,
+        ];
     }
 
     public function naoEncontrada(array $acao): void
@@ -38,6 +48,7 @@ final class Router
     {
         $metodo = $_SERVER['REQUEST_METHOD'] ?? 'GET';
         $caminho = Url::caminhoAtual();
+
         $rota = $this->rotas[$metodo][$caminho] ?? null;
 
         try {
@@ -47,16 +58,33 @@ final class Router
                 return;
             }
 
-            // Proteção de sessão centralizada: nenhuma página restrita é executada sem login
+            // Proteção de sessão centralizada:
+            // nenhuma página restrita é executada sem login.
             if (!$rota['publica'] && !Sessao::estaLogado()) {
                 header('Location: ' . Url::para('/login'));
                 exit;
             }
 
+            // Proteção CSRF:
+            // toda requisição POST precisa enviar um token válido.
+            if ($metodo === 'POST') {
+                $token = $_POST['csrf_token'] ?? null;
+
+                if (!is_string($token) || !Sessao::csrfValido($token)) {
+                    http_response_code(403);
+                    echo 'Requisição inválida. Atualize a página e tente novamente.';
+                    return;
+                }
+            }
+
+            // Executa a ação da rota somente após as validações.
             $this->executar($rota['acao']);
+
         } catch (Throwable $erro) {
             error_log((string) $erro);
+
             http_response_code(500);
+
             $this->executar($this->acaoErroInterno);
         }
     }
@@ -69,6 +97,7 @@ final class Router
         }
 
         [$classe, $metodo] = $acao;
+
         (new $classe())->$metodo();
     }
 

@@ -14,20 +14,23 @@ use Biblioteca\Core\Router;
 return static function (Router $r): void {
     $r->get('/login', [AuthController::class, 'formulario'], publica: true);
     $r->post('/login', [AuthController::class, 'entrar'], publica: true);
-    $r->get('/logout', [AuthController::class, 'sair'], publica: true);
+    $r->post('/logout', [AuthController::class, 'sair']);
 
-    // Área restrita ao funcionário logado
+    // Área restrita ao funcionário já logados
     $r->get('/', [HomeController::class, 'index']);
 
     $r->get('/livros', [LivroController::class, 'index']);
     $r->post('/livros', [LivroController::class, 'salvar']);
+    $r->get('/livros/editar', [LivroController::class, 'editar']);
+    $r->post('/livros/editar', [LivroController::class, 'atualizar']);
+    $r->post('/livros/excluir', [LivroController::class, 'excluir']);
 
     $r->get('/usuarios', [UsuarioController::class, 'index']);
     $r->post('/usuarios', [UsuarioController::class, 'salvar']);
-
+    $r->get('/usuarios/editar', [UsuarioController::class, 'editar']);
+    $r->post('/usuarios/editar', [UsuarioController::class, 'atualizar']);
     $r->get('/emprestimos', [EmprestimoController::class, 'index']);
     $r->post('/emprestimos', [EmprestimoController::class, 'salvar']);
-    $r->get('/emprestimos/devolver', [EmprestimoController::class, 'devolver']);
 
     // Páginas de erro
     $r->naoEncontrada([ErroController::class, 'naoEncontrado']);

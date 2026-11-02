@@ -31,6 +31,15 @@ if (!function_exists('asset')) {
     }
 }
 
+if (!function_exists('csrfField')) {
+    function csrfField(): string
+    {
+        return '<input type="hidden" name="csrf_token" value="'
+            . e(Sessao::tokenCsrf())
+            . '">';
+    }
+}
+
 if (!function_exists('antigo')) {
    
     function antigo(string $campo, string $padrao = ''): string

@@ -1,17 +1,3 @@
-/* ==========================================================================
-   Sistema de Biblioteca — style.css
-   --------------------------------------------------------------------------
-   Conceito visual: fichas de catálogo (aquelas gavetas de fichário antigas
-   de biblioteca). A navegação lembra as etiquetas das gavetas, e os
-   formulários lembram fichas com campos "de linha" (como se fossem
-   preenchidos à mão/máquina de escrever), em vez de caixinhas de formulário
-   genéricas de SaaS.
-
-   Este arquivo é único para todas as páginas — qualquer alteração aqui
-   reflete no site inteiro. As variáveis no :root abaixo são o "design
-   system" do projeto: se quiser mudar a paleta, mude só ali.
-   ========================================================================== */
-
 :root {
   /* Cores */
   --color-bg: #eae6da;

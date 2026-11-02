@@ -6,6 +6,7 @@
       </div>
 
       <form method="POST" action="<?= e(url('/emprestimos')) ?>">
+        <?= csrfField() ?>
         <div class="linha-campos">
           <div class="campo">
             <?php $usuarioAntigo = antigo('usuario_id'); ?>
@@ -75,13 +76,13 @@
                 <td><?= e(dataBr($emprestimo->getDataEmprestimo())) ?></td>
                 <td>
                   <?php 
-                    // Exibe a data de devolução formatada, ou em branco se ainda não devolvido
+                    
                     $dataDev = $emprestimo->getDataDevolucao();
                     echo $dataDev ? e(dataBr($dataDev)) : '-'; 
                   ?>
                 </td>
                 <td>
-                  <!-- AQUI ENTRA O BOTÃO DE DEVOLVER -->
+              
                   <?php if (empty($emprestimo->getDataDevolucao())): ?>
                     <a href="<?= e(url('/emprestimos/devolver?id=' . $emprestimo->getId())) ?>" class="btn btn-sm btn-success">Devolver</a>
                   <?php else: ?>

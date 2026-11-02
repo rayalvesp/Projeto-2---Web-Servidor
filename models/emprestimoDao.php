@@ -35,7 +35,7 @@ class EmprestimoDao extends Dao
     }
 
     public function devolver($id) {
-        $query = $this->db->prepare 
+        $query = $this->bd->prepare 
         ('UPDATE emprestimos SET data_devolucao = NOW() WHERE id = :id');
         $query->bindParam(':id', $id, PDO::PARAM_INT);
         $query->execute();

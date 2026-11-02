@@ -10,6 +10,7 @@
       <h1 class="page-title page-title--centro">Entrar</h1>
 
       <form method="POST" action="<?= e(url('/login')) ?>">
+        <?= csrfField() ?>
         <div class="campo">
           <label for="login-email">E-mail <span class="obrigatorio">*</span></label>
           <input type="email" id="login-email" name="email" value="<?= e(antigo('email')) ?>" required autocomplete="username" />
