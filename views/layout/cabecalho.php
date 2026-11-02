@@ -21,7 +21,6 @@
     </div>
     <nav class="drawer-nav" id="menu-principal" aria-label="Navegação principal">
 
-    
   <ul>
       <?php
       $itensMenu = [
@@ -41,16 +40,14 @@
       <?php endforeach; ?>
 
       <li>
-          <form method="POST" action="<?= e(url('/logout')) ?>">
+          <form method="POST" action="<?= e(url('/logout')) ?>" style="margin: 0;">
               <?= csrfField() ?>
-
-              <button type="submit">
+              <button type="submit" style="display: block; width: 100%; background: none; border: none; padding: inherit; font: inherit; color: inherit; text-align: left; cursor: pointer;">
                   Encerrar sessão
               </button>
           </form>
       </li>
   </ul>
-
 
     </nav>
   </header>
