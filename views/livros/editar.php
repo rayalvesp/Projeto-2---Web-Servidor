@@ -14,6 +14,7 @@ use Biblioteca\Models\Livro;
     <h1 class="page-title">Editar livro</h1>
 
     <form method="POST" action="<?= url('/livros/editar') ?>">
+        <?= csrfField() ?>
         <input type="hidden" name="id" value="<?= e((string) $livro->getId()) ?>">
 
         <div class="campo">

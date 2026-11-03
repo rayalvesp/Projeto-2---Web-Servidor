@@ -14,6 +14,7 @@ class Emprestimo
     private string $data_devolucao = '';
     private ?string $usuario_nome = null;
     private ?string $livro_titulo = null;
+    private ?string $data_devolucao_real = null;
 
     public function getId(): ?int
     {
@@ -72,5 +73,15 @@ class Emprestimo
     public function getLivroTitulo(): ?string
     {
         return $this->livro_titulo;
+    }
+    public function getDataDevolucaoReal(): ?string
+    {
+        return $this->data_devolucao_real;
+    }
+
+    public function setDataDevolucaoReal(?string $data): static
+    {
+        $this->data_devolucao_real = $data;
+        return $this;
     }
 }

@@ -7,6 +7,7 @@
       </div>
 
       <form method="POST" action="<?= e(url('/usuarios')) ?>">
+        <?= csrfField() ?>
         <div class="campo">
           <label for="usuario-nome">Nome <span class="obrigatorio">*</span></label>
           <input type="text" id="usuario-nome" name="nome" value="<?= e(antigo('nome')) ?>" required />

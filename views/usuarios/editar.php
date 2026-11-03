@@ -7,6 +7,7 @@
     </div>
 
     <form method="POST" action="<?= e(url('/usuarios/editar?id=' . $usuario->getId())) ?>">
+        <?= csrfField() ?>
         <div class="campo">
             <label for="usuario-nome">Nome <span class="obrigatorio">*</span></label>
             <input

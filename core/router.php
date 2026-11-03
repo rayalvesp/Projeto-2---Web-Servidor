@@ -9,7 +9,7 @@ use Throwable;
 
 final class Router
 {
-   
+
     private array $rotas = [];
     private ?array $acaoNaoEncontrada = null;
     private ?array $acaoErroInterno = null;
@@ -47,10 +47,20 @@ final class Router
                 return;
             }
 
-            // Proteção de sessão centralizada: nenhuma página restrita é executada sem login
+            // Proteção de sessão centralizada.
             if (!$rota['publica'] && !Sessao::estaLogado()) {
                 header('Location: ' . Url::para('/login'));
                 exit;
+            }
+
+            // Proteção CSRF para todas as requisições POST.
+            if ($metodo === 'POST') {
+                $token = $_POST['csrf_token'] ?? null;
+
+                if (!is_string($token) || !Sessao::csrfValido($token)) {
+                    http_response_code(403);
+                    throw new \RuntimeException('Token CSRF inválido.');
+                }
             }
 
             $this->executar($rota['acao']);
@@ -60,6 +70,8 @@ final class Router
             $this->executar($this->acaoErroInterno);
         }
     }
+
+
 
     private function executar(?array $acao): void
     {
