@@ -1,204 +1,91 @@
-# Biblioteca Cidadão
+Biblioteca Cidadão — Projeto 2
 
-## Sobre o projeto
 
-A **Biblioteca Cidadão** é uma aplicação web desenvolvida como projeto acadêmico para a disciplina de **Web Servidor**, na **Universidade Tecnológica Federal do Paraná (UTFPR)**.
+Sobre o projeto
+O Projeto 2 da Biblioteca Cidadão representa a evolução da aplicação web desenvolvida para a disciplina de Web Servidor na UTFPR. O sistema expande as funcionalidades de gestão de uma biblioteca universitária, implementando operações completas de CRUD (com edição e exclusão controladas), migração completa para Banco de Dados Relacional, arquitetura orientada a objetos (POO) estruturada no padrão MVC e DAO, além de camadas rigorosas de segurança web no lado do servidor.
 
-O sistema tem como objetivo disponibilizar funcionalidades relacionadas ao gerenciamento de livros de uma biblioteca, permitindo que usuários autenticados (funcionários) cadastrem e consultem livros presentes no sistema, além de possibilitar o gerenciamento de empréstimos de clientes da biblioteca.
+Integrantes
 
-O projeto foi desenvolvido utilizando **PHP 8+**, Programação Orientada a Objetos (POO), arquitetura MVC, banco de dados MySQL e acesso aos dados por meio de PDO.
+Rayane Alves
+Gleice Emilly
 
-## Integrantes
+Contribuições e Atividades dos Integrantes
+Rayane Alves
+Desenvolvimento e Gestão de Empréstimos: Implementação completa da lógica de controle, cadastro, baixa de empréstimos de livros para os clientes da biblioteca.
 
-* **Luis Stevan**
-* **Rayane Alves**
-* **Gleice Emilly**
+Refatoração para POO: Implementação orientada a objetos (classes, models, DAOs e controllers) aplicada à gestão de empréstimos.
 
----
+Segurança e Confiabilidade: Atuação direta na integração de validações no lado do servidor, proteção de rotas e suporte na aplicação de segurança contra vulnerabilidades web.
 
-## Atividades dos integrantes
 
-### Luis Stevan
+Gleice Emilly
+Gerenciamento Completo de Usuários (CRUD Avançado): Desenvolvimento das rotinas de edição, atualização e exclusão de usuários cadastrados no sistema.
 
-* Desenvolvimento e implementação das funcionalidades relacionadas ao gerenciamento de livros;
-* Implementação de validações dos dados dos livros no lado do servidor;
-* Desenvolvimento e integração de funcionalidades em PHP;
-* Organização da estrutura do projeto;
-* Participação na integração e controle de versões utilizando Git e GitHub.
-* Desenvolvimento do front-end;
+Implementação em POO: Estruturação das regras de negócio de usuários utilizando Programação Orientada a Objetos, mapeando entidades e persistência via camada DAO.
 
-### Gleice Emilly
+Testes e Validações: Aplicação de validações de dados e refinamento da interface de edição de usuários (views/usuarios/editar.php).
 
-* Implementação e integração das funcionalidades em PHP;
-* Desenvolvimento das funcionalidades de cadastro e edição de usuários;
-* Testes e correções das funcionalidades desenvolvidas.
-* Participação na integração e controle de versões utilizando Git e GitHub.
+Principais Evoluções Técnicas (Comparado ao Projeto 1)
+Migração para Banco de Dados Relacional: Substituição do armazenamento estático por um banco relacional estruturado com tabelas normalizadas (usuarios, livros, autores, categorias, emprestimos).
 
-### Rayane Alves
+Programação Orientada a Objetos (POO) & DAO: O código passou a ser orientado a objetos, utilizando o padrão DAO (Data Access Object) para isolar o acesso aos dados.
 
-* Desenvolvimento da tela de login e da funcionalidade de autenticação dos usuários;
-* Desenvolvimento das funcionalidades atribuídas ao gerenciamento de empréstimos;
-* Implementação e integração das funcionalidades em PHP;
-* Testes e correções das funcionalidades desenvolvidas.
-* Participação na integração e controle de versões utilizando Git e GitHub.
-  
----
+Segurança Avançada:
+Prepared Statements (PDO): Eliminação total de riscos de SQL Injection.
 
-## Objetivo
+Proteção contra CSRF: Tokens de segurança validados em todas as requisições POST (cadastros, exclusões e alteração de sessão).
 
-O projeto tem como objetivo aplicar conceitos de desenvolvimento web no lado do servidor, incluindo:
+Sessões e Logout Seguro: Conversão da rota de encerramento de sessão obrigatoriamente para método POST.
 
-* Processamento de formulários com PHP;
-* Validação de dados no servidor;
-* Autenticação de usuários;
-* Controle de acesso através de sessões;
-* Separação entre lógica de aplicação e apresentação;
-* Organização do projeto seguindo uma estrutura inspirada no padrão MVC;
-* Manipulação e armazenamento de informações utilizando arquivos JSON.
+Estrutura do Projeto
+A aplicação segue o padrão arquitetural MVC aliado ao padrão DAO:
 
----
+Plaintext
+Biblioteca_Cidadao/
+├── controllers/
+├── models/
+├── views/
+├── helpers/
+├── config/
+└── README.md
 
-## Funcionalidades
+Instalação, Execução e Configuração do Banco de Dados
+1. Requisitos e Configuração do Banco de Dados (.env ou arquivo de configuração)
+O sistema opera com as seguintes configurações padrão para conexão via PDO:
 
-O sistema possui funcionalidades relacionadas a:
+Host: localhost
+Porta: 3306
+Nome do Banco: biblioteca_cidadao
+Usuário: root
+Senha: (vazia / sem senha)
 
-* Autenticação de usuários;
-* Controle de acesso através de sessão;
-* Cadastro e listagem de livros presentes na base de dados e suas respectivas informações;
-* Cadastro e listagem de usuários presentes na base de dados e suas respectivas informações;
-* Cadastro e listagem de empréstimos presentes na base de dados e suas respectivas informações;
-* Validação dos dados enviados pelos formulários;
-* Armazenamento dos dados em arquivos JSON.
+2. Como acessar e gerenciar o Banco de Dados pelo XAMPP
+Para verificar ou importar a estrutura das tabelas no MySQL utilizando o XAMPP:
 
----
+Abra o Painel do XAMPP (XAMPP Control Panel).
+
+Inicie os Serviços: Clique em Start nos módulos Apache e MySQL (ambos devem ficar com o fundo verde).
+
+Abra o phpMyAdmin: No seu navegador, acesse:
+
+http://localhost/phpmyadmin
+Localize o Banco de Dados: Na coluna lateral esquerda, selecione o banco biblioteca_cidadao (caso ainda não exista, clique em "Novo", digite o nome biblioteca_cidadao e clique em Criar). A partir daí, você poderá inspecionar e gerenciar as tabelas de usuários, livros e empréstimos diretamente.
+
+3. Colocar o projeto no servidor
+Copie a pasta do projeto para o diretório htdocs do XAMPP:
+
+C:\xampp\htdocs\Biblioteca_Cidadao
+Abra o navegador e acesse a aplicação a partir da rota principal configurada no seu sistema.
 
 ## Tecnologias utilizadas
 
-* **PHP 8+**
-* **HTML5**
-* **Programação Orientada a Objetos (POO)**
-* **MySQL**
-* **PDO**
-* **COMPOSER**
-* **PHP DOTENV (vlucas/phpdotent)**
-* **CSS3**
-* **JavaScript**
-* **JSON**
-* **Apache**
-* **XAMPP**
-* **Git**
-* **GitHub**
+- *PHP 8+* (com Programação Orientada a Objetos)
+- *MySQL / PDO* (Banco de dados relacional com Prepared Statements)
+- *HTML5 & CSS3* (Interface responsiva e padronizada)
+- *JavaScript* (Interações e comportamentos no front-end)
+- *XAMPP* (Ambiente de desenvolvimento local - Apache e MySQL)
+- *Git & GitHub* (Controle de versão e colaboração)
 
----
-
-## Estrutura do projeto
-
-A aplicação está organizada de forma inspirada no padrão MVC, separando a apresentação, a lógica de controle e o acesso aos dados.
-
-```text
-Biblioteca_Cidadao/
-├── controllers/
-├── data/
-├── models/
-├── views/
-└── README.md
-```
-
-Os principais componentes possuem as seguintes responsabilidades:
-
-* **controllers/** — responsáveis pelo processamento das requisições e pela lógica de controle;
-* **models/** — responsáveis pela representação e manipulação dos dados;
-* **data/** — armazenamento das informações utilizadas pelo sistema em arquivos JSON;
-* **views/** — páginas responsáveis pela apresentação das informações ao usuário.
-
----
-
-## Instalação e execução
-
-### 1. Instalar o XAMPP
-
-Instale o **XAMPP**, contendo o Apache e o PHP.
-
-### 2. Colocar o projeto no servidor
-
-Copie a pasta do projeto para a pasta `htdocs` do XAMPP.
-
-Exemplo:
-
-```text
-C:\xampp\htdocs\Biblioteca_Cidadao
-```
-
-### 3. Iniciar o Apache
-
-Abra o **XAMPP Control Panel** e inicie o servidor **Apache**.
-
-### 4. Acessar o projeto
-
-Abra o navegador (Google chrome ou similar) e acesse:
-
-```text
-http://localhost/Biblioteca_Cidadao/views/login.php     
-```
-
-Usuário: atendimento@bibliotecacidadao.gov.br
-
-Senha: biblioteca2026
-
----
-
-## Configuração do sistema
-
-O sistema utiliza arquivos **JSON** para armazenar os dados, não sendo necessário configurar um banco de dados para executar o projeto.
-
-Os arquivos de dados encontram-se na pasta:
-
-```text
-data/
-```
-
-Antes de executar o sistema, certifique-se de que o servidor Apache esteja iniciado e que o PHP esteja disponível através do XAMPP.
-
-Também é necessário garantir que os arquivos JSON utilizados pelo sistema estejam presentes na pasta `data/` e possam ser acessados pelo PHP.
-
----
-
-## Autenticação e controle de acesso
-
-O sistema utiliza **sessões do PHP** para controlar o acesso às funcionalidades que necessitam de autenticação.
-
-Usuários não autenticados são direcionados para a página de login ao tentar acessar diretamente determinadas áreas do sistema.
-
----
-
-## Validação e processamento dos dados
-
-Os formulários do sistema são processados no lado do servidor utilizando PHP.
-
-As informações recebidas são submetidas a validações antes de serem utilizadas ou armazenadas. Dessa forma, as validações não dependem exclusivamente do HTML ou JavaScript executado no navegador.
-
----
-
-## Armazenamento dos dados
-
-Os dados são armazenados em arquivos no formato **JSON**, não sendo utilizado banco de dados.
-
-Entre os dados armazenados estão informações relacionadas a:
-
-* Usuários;
-* Livros;
-* Empréstimos.
-
----
-
-## Particularidades do projeto
-
-### Bugs conhecidos
-
-Até a finalização do projeto, não foram identificados bugs conhecidos que impeçam o funcionamento das principais funcionalidades implementadas.
-
-## Controle de versão
-
-O desenvolvimento do projeto foi realizado utilizando **Git** para controle de versões e **GitHub** para armazenamento e colaboração no código-fonte.
-
-O repositório contém o código-fonte desenvolvido durante o projeto, bem como este documento com as informações de instalação, configuração e descrição das atividades realizadas pela equipe.
+### Acesso Inicial:
+- *E-mail:* atendimento@bibliotecacidadao.gov.br 
+- *Senha:* biblioteca2026
