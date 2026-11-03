@@ -6,6 +6,7 @@
       </div>
 
       <form method="POST" action="<?= e(url('/emprestimos')) ?>">
+        <?= csrfField() ?>
         <div class="linha-campos">
           <div class="campo">
             <?php $usuarioAntigo = antigo('usuario_id'); ?>
@@ -61,18 +62,33 @@
             <th scope="col">Livro</th>
             <th scope="col">Empréstimo</th>
             <th scope="col">Devolução</th>
+            <th scope="col">Ações</th>
           </tr>
         </thead>
-        <tbody>
+         <tbody>
           <?php if (empty($emprestimos)): ?>
-            <tr><td colspan="4">Nenhum empréstimo registrado.</td></tr>
+            <tr><td colspan="5">Nenhum empréstimo registrado.</td></tr>
           <?php else: ?>
             <?php foreach ($emprestimos as $emprestimo): ?>
               <tr>
                 <td><?= e($emprestimo->getUsuarioNome()) ?></td>
                 <td><?= e($emprestimo->getLivroTitulo()) ?></td>
                 <td><?= e(dataBr($emprestimo->getDataEmprestimo())) ?></td>
-                <td><?= e(dataBr($emprestimo->getDataDevolucao())) ?></td>
+                <td>
+                  <?php 
+                    
+                    $dataDev = $emprestimo->getDataDevolucao();
+                    echo $dataDev ? e(dataBr($dataDev)) : '-'; 
+                  ?>
+                </td>
+                <td>
+              
+                  <?php if (empty($emprestimo->getDataDevolucao())): ?>
+                    <a href="<?= e(url('/emprestimos/devolver?id=' . $emprestimo->getId())) ?>" class="btn btn-sm btn-success">Devolver</a>
+                  <?php else: ?>
+                    <span class="badge bg-secondary">Devolvido</span>
+                  <?php endif; ?>
+                </td>
               </tr>
             <?php endforeach; ?>
           <?php endif; ?>
