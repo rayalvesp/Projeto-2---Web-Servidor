@@ -16,7 +16,7 @@ return static function (Router $r): void {
     $r->post('/login', [AuthController::class, 'entrar'], publica: true);
     $r->get('/logout', [AuthController::class, 'sair'], publica: true);
 
-    // Área restrita ao funcionário já logados
+    // Funcionarios logados
     $r->get('/', [HomeController::class, 'index']);
 
     $r->get('/livros', [LivroController::class, 'index']);
@@ -32,7 +32,7 @@ return static function (Router $r): void {
     $r->get('/emprestimos', [EmprestimoController::class, 'index']);
     $r->post('/emprestimos', [EmprestimoController::class, 'salvar']);
 
-    // Páginas de erro
+    // Paginas de erro
     $r->naoEncontrada([ErroController::class, 'naoEncontrado']);
     $r->erroInterno([ErroController::class, 'erroInterno']);
 };

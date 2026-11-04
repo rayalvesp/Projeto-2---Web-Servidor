@@ -7,6 +7,7 @@
       </div>
 
       <form method="POST" action="<?= e(url('/livros')) ?>">
+        <?= csrfField() ?>
 
         <div class="campo">
           <label for="livro-titulo">Título <span class="obrigatorio">*</span></label>
@@ -95,6 +96,7 @@
                     action="<?= e(url('/livros/excluir')) ?>"
                     style="display: inline-block;"
                     onsubmit="return confirm('Tem certeza que deseja excluir este livro?');">
+                    <?= csrfField() ?>
 
                     <input type="hidden" name="id" value="<?= e((string) $livro->getId()) ?>">
 
